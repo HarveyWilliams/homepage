@@ -1,0 +1,441 @@
+/*
+##############################################
+Designed and coded by Harvey Williams.
+Portfolio: www.harvey.jumpify.co.uk
+##############################################
+*/
+
+html {
+	overflow:hidden;
+	font-family:Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+html, body {
+	width:100%;
+	height:100%;
+	margin:0px;
+}
+
+/*
+#######################
+Text
+#######################
+*/
+
+a {
+	color:blue;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	margin:0px;
+	font-family:Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+/*
+#######################
+Lists
+#######################
+*/
+
+ol {
+	margin:0px;
+}
+
+/*
+#######################
+Settings
+#######################
+*/
+
+.li_wrapper {
+	cursor:pointer;
+}
+
+#settings_show {
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:32px;
+	height:32px;
+	background:url("../graphics/settings.png");
+	background-size:100% 100%;
+	opacity:0;
+	cursor:pointer;
+}
+
+#settings_show:hover {
+	opacity:1;
+}
+
+#settings_wrapper {
+	display:none;
+	position:absolute;
+	top:40%;
+	left:50%;
+	width:500px;
+	max-height:560px;
+	margin-top:-150px;
+	margin-left:-250px;
+	border:1px black solid;
+	background-color:white;
+	overflow:hidden;
+}
+
+/*
+#######################
+Settings -> border
+#######################
+*/
+
+#settings_border {
+	width:100%;
+	height:30px;
+	padding-left:3px;
+	border-bottom:1px black solid;
+}
+
+/* no border bottom because the #settings_border has it */
+/* the JS in the html changes the border bottom to white when a tab is chosen, it is 2px to fix a problem with chrome */
+#settings_border h2 {
+	display:inline;
+	padding-left:3px;
+	padding-right:3px;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	cursor:pointer;
+}
+
+#settings_border_escape {
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:20px;
+	height:20px;
+	border-left:1px black solid;
+	border-bottom:1px black solid;
+	background-image:url("../graphics/exit.png");
+	background-size:100% 100%;
+	cursor:pointer;
+}
+
+/*
+#######################
+Settings -> content
+#######################
+*/
+
+#settings_content {
+	max-height:500px;
+	padding:10px;
+	overflow-y:scroll;
+	display:visible;
+}
+
+#settings_help {
+	display:none;
+}
+
+#list_container {
+	width:100%;
+}
+
+.new_links {
+	width:170px;
+	margin-bottom:3px;
+}
+
+ul#sortable {
+	width:100%;
+	margin:0;
+	padding:0;
+}
+
+ul#sortable li {
+	margin-bottom:0.2em;
+	border: 1px solid #CCC;
+	list-style-type:none;
+	cursor:move;
+}
+
+ul#sortable li.clone {
+	background:rgba(255, 212, 170, 0.3);
+}
+
+.links_li {
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+.delete {
+	float:right;
+	height:21px;
+	width:21px;
+	background-image:url("../graphics/exit.png");
+	background-color:transparent;
+	cursor:pointer;
+}
+
+#settings_links_css_edit textarea {
+	width:100%;
+	height:300px;
+}
+
+#settings_links_css_manage ul, #settings_clocks_manage ul {
+	padding-left:0px;
+	list-style:none;
+}
+
+#settings_links_css_manage ul li, #settings_clocks_manage ul li {
+	width:97%;
+	padding-left:5px;
+	margin-bottom:2px;
+	border:1px #CCC solid;
+}
+
+#settings_backgrounds_manage ul {
+	width:100%;
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+	text-align:center;
+}
+
+#settings_backgrounds_manage ul li {
+	width:23%;
+	padding-left:1%;
+	padding-right:1%;
+	margin:0px;
+	display:inline-block;
+}
+
+#settings_backgrounds_manage li img {
+	width:100%;
+	height:80px;
+	background-size:cover;
+}
+
+#settings_backgrounds_manage li input {
+	position:relative;
+	top:0px;
+	right:0px;
+}
+
+.list {
+	padding-left:0px;
+	list-style:none;
+}
+
+.list li {
+	width:97%;
+	padding-left:5px;
+	margin-bottom:2px;
+	border:1px #CCC solid;
+	cursor:pointer;
+}
+
+.icons {
+	height:200px;
+	border:1px black solid;
+	overflow-y:scroll;
+}
+
+.icons ul {
+	width:100%;
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+	text-align:center;
+}
+
+.icons ul li {
+	position:relative;
+	width:48px;
+	height:48px;
+	padding:2px;
+	margin:0px;
+	display:inline-block;
+	cursor:pointer;
+}
+
+.icons ul li img {
+	width:48px;
+	height:48px;
+	position:absolute;
+	left:0px;
+	background-size:cover;
+}
+
+.icon {
+	background:#D8D8D8;
+}
+
+.tick {
+	display:none;
+}
+
+.backgrounds_wrapper {
+	position:relative;
+}
+
+.backgrounds_wrapper img {
+	outline:1px solid black;
+}
+
+.background_delete {
+	position:absolute;
+	top:0px;
+	right:0px;
+	height:20px;
+	width:20px;
+	background-image:url("../graphics/exit.png");
+	background-color:white;
+	cursor:pointer;
+	outline:1px solid black;
+}
+
+#version {
+	float:right;
+}
+
+.pic {
+	display:inline-block;
+	width:50px;
+	height:50px;
+	background-color:black;
+	background-repeat:no-repeat;
+	border:1px solid gray;
+	color:transparent;
+	cursor:pointer;
+}
+
+/*
+#######################
+Buttons
+#######################
+*/
+
+.back {
+	float:left;
+	width:80px;
+	height:26px;
+	margin-top:4px;
+	background:-moz-linear-gradient(center top, #fe1a00 5%, #ce0100 100% );
+	border-radius:20px;
+	border:1px black solid;
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	cursor:pointer;
+	font-family:arial;
+}
+
+.back:hover {
+	color:white;
+}
+
+.back:focus {
+	color:white;
+	background:-moz-linear-gradient(center bottom, #fe1a00 5%, #ce0100 100% );
+}
+
+.go_back {
+	float:right;
+	width:80px;
+	height:26px;
+	margin-top:4px;
+	cursor:poiter;
+	font-family:arial;
+}
+
+.update {
+	float:right;
+	width:100px;
+	height:30px;
+	background:-moz-linear-gradient(center top , #63B8EE 5%, #468CCF 100%) repeat scroll 0% 0% #63B8EE;
+	border-radius:20px;
+	border:1px black solid;
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	cursor:pointer;
+	font-family:arial;
+}
+
+.update:hover {
+	color:white;
+}
+
+.update:focus {
+	color:white;
+	background:-moz-linear-gradient(center bottom , #63B8EE 5%, #468CCF 100%) repeat scroll 0% 0% #63B8EE;
+}
+
+/*
+#######################
+Colour Picker
+#######################
+*/
+
+.colour_picker {
+}
+
+/*
+#######################
+Miscellaneous
+#######################
+*/
+
+label {
+	display:inline-block;
+	width:100px;
+	text-align:right;
+}
+
+.content {
+	display:none;
+}
+
+.textarea_max {
+	height:300px;
+	width:100%;
+}
+
+.hidden {
+	display:none;
+}
+
+.clear {
+	display:block;
+	float:clear;
+	height:2px;
+}
+
+#saved {
+	position:relative;
+	width:140px;
+	height:20px;
+	top:95%;
+	padding:10px;
+	margin:0 auto;
+	background:white;
+	border-radius:30px;
+	box-shadow:0px 0px 10px black;
+	text-align:center;
+	opacity:0;
+	animation:disappear 7s;
+}
+
+@keyframes disappear {
+	0% { opacity:0; }
+	25% { opacity:1; }
+	50% { opacity:1; }
+	100% { opacity:0; }
+}
+
+.align_right {
+	position:absolute;
+	right:10px;
+}
+
+.show_link {
+	display:block;
+}

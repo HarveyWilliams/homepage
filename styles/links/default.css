@@ -1,0 +1,91 @@
+/*
+#######################
+This style sheet gives the styles to the links/booksmarks you have for websites.
+#######################
+*/
+
+#links_grab {
+	z-index:1;
+	position:absolute;
+	left:-30px;
+	width:40px;
+	height:40px;
+	top:50%;
+	margin-top:-20px;
+	transform:rotate(45deg);
+	background-color:white;
+	/* browser compatibilty */
+	-webkit-transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+}
+
+/* used to center #links */
+#links_wrapper {
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+}
+
+#links_wrapper:before {
+	content:'';
+	display:inline-block;
+	height:100%; 
+	vertical-align:middle;
+}
+
+#links {
+	z-index:2;
+	position:relative;
+	display:inline-block;
+	vertical-align:middle;
+	margin-left:-309px;
+	transition:margin 1s ease;
+	/* browser compatibility */
+	-webkit-transition:margin 1s ease-in-out;
+	-moz-transition:margin 1s ease-in-out;
+}
+
+#links ul {
+	padding:0px;
+	list-style-type:none;
+}
+
+#links_grab:hover + #links, #links:hover {
+	margin-left:-5px;
+	transition:margin 1s ease;
+	/* browser compatibility */
+	-webkit-transition:margin 1s ease-in-out;
+	-moz-transition:margin 1s ease-in-out;
+}
+
+#links li {
+	width:100%;
+	height:48px;
+	font-family:'Codystar', cursive;
+}
+
+.link_icon {
+	float:left;
+	height:48px;
+	width:48px;
+	visibility:visible;
+	background-color:inherit;
+	background-size:cover;
+}
+
+.link_text {
+	float:right;
+	width:254px;
+	height:48px;
+	padding-left:8px;
+	font-size:40px;
+	color:white;
+	visibility:visible;
+}
+
+.link_icon:hover + .link_text, .link_text:hover {
+	background-color:inherit;
+}

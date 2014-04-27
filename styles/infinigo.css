@@ -1,0 +1,265 @@
+/*
+#######################
+InfiniGo
+#######################
+*/
+
+#go_container {
+	position:relative;
+	width:100%;
+	height:100px;
+}
+
+#go {
+	z-index:1;
+	position:relative;
+	top:0px;
+	max-width:600px;
+	width:40%;
+	height:100%;
+	transition:opacity 0.5s;
+	margin:0 auto;
+}
+
+#container {
+	z-index:1;
+	position:relative;
+	top:90px;
+	width:100%;
+	height:100%;
+}
+
+/*	ENGINE INDEX
+	----------------------------------------------------- */
+	
+#engines {
+	z-index:1;
+	width:100%;
+	height: 80px;
+	position: absolute;
+	top:10px;
+}
+
+#engines a {
+	display: block;
+	width: 225px;
+	height: 80px;
+	cursor: pointer;
+	opacity: 0.0;
+	position: absolute;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#engines a img {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+
+
+/* 	SEARCH BOX
+	----------------------------------------------------- */
+
+#box {
+	padding: 0px 5%;
+	width:90%;
+}
+
+#input {
+	width:100%;
+	background:rgba(255,255,255,0.5);
+}
+
+#input input {
+	outline:0;
+	border:none;
+	background:white url(../graphics/infinigo/field.png) left top no-repeat;
+	-webkit-appearance: textfield;
+	font:19px 'HelveticaNeue-Light', "Helvetica Neue Light", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-weight:300;
+	color:#363d42;
+	width:85%;
+	padding:6px 7.5% 6px 7.5%;
+}
+
+#lang {
+	position: absolute;
+	right: 51px;
+	top: 16px;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 3px 5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	color: #b7c2cf;
+	cursor: pointer;
+}
+
+#lang:hover {
+	background: #b7c2cf;
+	color: white;
+}
+
+#lang:active {
+	background: #939fad;
+}
+
+#method {
+	position:absolute;
+	width:200px;
+	top:50px;
+	left:50%;
+	margin-left:-100px;
+	text-align:center;
+}
+
+#method a {
+	padding: 3px 6px;
+	margin: 0 2px;
+	cursor: pointer;
+	color: white;
+	text-decoration:none;
+}
+
+#method a.active,
+#method a:hover {
+	text-decoration:underline;
+}
+
+
+
+/* 	INFO BOX
+	----------------------------------------------------- */
+
+#info {
+	z-index:1;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
+
+#toggleInfo {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: url(../graphics/infinigo/info.png);
+	width: 16px;
+	height: 16px;
+	color: rgba(0,0,0,0);
+	opacity: 0.2;
+	cursor: pointer;
+}
+
+#toggleInfo:hover {
+	opacity: 0.5;
+}
+
+#toggleInfo:active {
+	opacity: 0.7;
+}
+
+#infoBox {
+	display: none;
+	position: absolute;
+	right: 13px;
+	bottom: 13px;
+	background: #ecf2f8 url(../graphics/infinigo/box.png) left top repeat-x;
+	-webkit-border-radius: 8px;
+	padding: 10px 20px;
+	width: 300px;
+	font-size: 11px;
+	line-height: 16px;
+	color: #363d42;
+	-webkit-box-shadow: 0 0 20px white;
+}
+
+#infoBox h2 {
+	font: 19px 'HelveticaNeue-Light', "Helvetica Neue Light", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-weight: 300;
+	margin: 3px 0 10px 0;
+	color: #939fad;
+}
+
+#infoBox strong {
+	font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica";
+}
+
+#infoBox p {
+	margin: 5px 0;
+}
+
+#infoBox .source {
+	color: #939fad;
+}
+
+#infoBox .source a {
+	color: #74889e;
+	border-bottom: 1px solid #d6e0ea;
+}
+
+#infoBox .source a:hover {
+	color: #363d42;
+	border-bottom: 1px solid #939fad;
+}
+
+#infoBox hr {
+	margin: 10px -20px;
+	border: 0;
+	border-top: solid 1px #d6e0ea;
+	border-bottom: 1px solid white;
+}
+
+#infoBox #corner {
+	position: absolute;
+	background: url(../graphics/infinigo/info_corner.png);
+	height: 24px;
+	width: 24px;
+	right: -13px;
+	bottom: -13px;
+}
+
+
+
+/* 	SEARCH SUGGESTIONS
+	----------------------------------------------------- */
+
+#sugs {
+	display: none;
+	position: absolute;
+	background: rgba(255,255,255,0.8);
+	border: 1px solid #dae2e9;
+	border-top: 0;
+	left: 41px;
+	top: 68px;
+	right: 41px;
+	list-style: none;
+	padding: 3px 0;
+	font-size: 11px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+}
+
+#sugs li a {
+	display: block;
+	padding: 3px 8px;
+	color: #74889e;
+}
+
+#sugs li a {
+	display: block;
+	padding: 3px 8px;
+	color: #74889e;
+}
+
+#sugs li.active a {
+	background: #b7c2cf;
+	color: white;
+}
+
+#sugs li a:active {
+	background: #939fad;
+}
