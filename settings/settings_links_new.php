@@ -1,5 +1,5 @@
 <h3>New links</h3>
-<form enctype="multipart/form-data" action="action.php" method="POST">
+<form>
 	<label for="link_name">Name:</label>
 	<input type="text" name="link_name" id="link_name" class="new_links" autocomplete="off" required="required"/>
 	<br />
@@ -23,19 +23,20 @@
 	<input type="text" name="link_url" id="link_url" class="new_links" autocomplete="off" required="required"/>
 	<br />
 	<label for="background_colour">Background:</label>
-	<input type="text" name="background_colour" class="colour_picker" id="background_colour" value="#000000"/>
+	<input type="text" name="link_background_colour" class="colour_picker" id="link_background_colour" value="#000000"/>
 	<br />
 	<label for="icon_colour">Icon Colour:</label>
-	<input type="text" name="icon_colour" class="colour_picker" id="icon_colour" value="#ffffff"/>
+	<input type="text" name="link_icon_colour" class="colour_picker" id="link_icon_colour" value="#ffffff"/>
 	<br />
 	<label for="link_icon">Icon:</label>
-	<input name="link_icon" class="pic" id="link_icon"/>
+	<input name="link_icon" id="link_icon" class="hidden"/>
+	<div class="pic" id="link_icon_preview"></div>
 	<br />
 	<div class="show-and-hide-content hidden" id="choose_icon">
 		<h4>Decide how you want to choose the link icon:</h4>
-		<input type="radio" name="icon_type" value="upload" data-type="upload"/>Upload
-		<input type="radio" name="icon_type" value="choose_archive" data-type="choose_archive"/>Archive
-		<input type="radio" name="icon_type" value="choose_personal" data-type="choose_personal"/>Personal Uploads
+		<input type="radio" name="link_icon_type" value="upload" data-type="upload"/>Upload
+		<input type="radio" name="link_icon_type" value="choose_archive" data-type="choose_archive"/>Archive
+		<input type="radio" name="link_icon_type" value="choose_personal" data-type="choose_personal"/>Personal Uploads
 		<input type="file" name="link_icon_upload" class="content content-upload"/>
 		<div class="content content-choose_archive">
 			<div class="icons">
@@ -70,10 +71,33 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-	<input class="update" type="submit" value="Update"/>
+	<input class="update" type="submit" value="Update" onclick="return false;"/>
 </form>
 <button class="back">Cancel</button>
 <script>
+	$('.update').click(function() {
+		var link_name = $('#link_name').val();
+		var link_font = $('#link_font').val();
+		var link_url = $('#link_url').val();
+		var link_background_colour = $('#link_background_colour').val();
+		var link_icon_colour = $('#link_icon_colour').val();
+		var link_icon = $('#link_icon').val();
+	
+		// create a 'fake' representation of the link that the user has created on the current page
+		$('#links ul').append('<li><a style="background-color:' + link_background_colour + ';" href="' + link_url + '"><div style="fill:'+ link_icon_colour + ';background-image:url(' + link_icon + ');" class="link_icon"></div><span style="font-family:' + link_font + ';" class="link_text">' + link_name + '</span></a></li>');
+		
+		// send the data to the server to be processed
+		$.post('action.php', {
+			link_name: $('#link_name').val(),
+			link_font: $('#link_font').val(),
+			link_url: $('#link_url').val(),
+			link_background_colour: $('#link_background_colour').val(),
+			link_icon_colour: $('#link_icon_colour').val(),
+			link_icon_type: $('[name="link_icon_type"]').val(),
+			link_icon: $('#link_icon').val()
+		});
+	});
+	
 	// lets the back button in the settings go back
 	$('.back').click(function() {
 		$(this).parent().hide();
@@ -81,26 +105,44 @@
 	});
 	
 	// sets the icon preview background to be equal to the selected colour
-	$('#background_colour').on('change', function() {
-		background_colour = $(this).val();
-		$('#link_icon').css('background-color', background_colour);
+	$('#link_background_colour').on('change', function() {
+		var link_background_colour = $(this).val();
+		$('#link_icon_preview').css('background-color', link_background_colour);
 	});
 	
 	// sets the icon preview icon colour to be equal to the selected colour
-	$('#icon_colour').on('change', function() {
-		icon_colour = $(this).val();
-		$('#link_icon').css('fill', icon_colour);
+	$('#link_icon_colour').on('change', function() {
+		var link_icon_colour = $(this).val();
+		$('#link_icon_preview').css('fill', link_icon_colour);
 	});
 	
 	// allows the user to choose an icon
-	$('#link_icon').click(function() {
+	$('#link_icon_preview').click(function() {
 		$('#choose_icon').toggle();
 	});
 	
-	// when that li is clicked on, the image is sent to the #icon (to let the user know that something has happened), and the value of #link_icon is set the the image
+	// when that li is clicked on, the image is sent to the #link_icon_preview (to let the user know that something has happened), and the value of #link_icon is set the the image
 	$('#settings_links_new li').click(function() {
 		var image = $(this).children('.icon').attr('src');
-		$('#link_icon').css('background-image', 'url("'+image+'")');
+		// this gets the extension of var image
+		var extension = image.substring(image.lastIndexOf('.') + 1);
+		if (extension=='svg') {
+			// remove any background attributes (if the user previously selected an image which wasn't an svg)
+			$('#link_icon_preview')
+				.css('background-image', '')
+				.css('background-size', '');
+			// remove any potential svg information (if the user has previously selected an svg to put in)
+			$('#link_icon_preview').empty();
+			// load in the new svg
+			$('#link_icon_preview').load(image);
+		} else {
+			// remove any potential svg information (if the user has previously selected an svg to put in)
+			$('#link_icon_preview').empty();
+			// set the css so the background image can be viewed
+			$('#link_icon_preview')
+				.css('background-image', 'url("'+image+'")')
+				.css('background-size', 'cover');
+		}
 		$('#link_icon').val(image);
 		$('#choose_icon').hide();
 	});
@@ -133,11 +175,11 @@
 	});
 	
 	// javascript color picker
-	$("#background_colour").spectrum ({
+	$("#link_background_colour").spectrum ({
 		color: "#000000",
 	});
 	
-	$("#icon_colour").spectrum ({
+	$("#link_icon_colour").spectrum ({
 		color: "#ffffff",
 	});
 	$(".colour_picker").spectrum({

@@ -9,7 +9,7 @@
 	###################
 	*/
 	
-	// $xml must be reloaded otherwise the pre-updated xml will continue to be used
+	// load xml
 	$xml = simpleXML_load_file($xml_file);
 	
 	// set the clock
@@ -89,6 +89,8 @@
 		<script src="js/clock/<? echo $clock; ?>.js"></script>
 	</head>
 	<body onload="startTime()">
+		<!-- Page Load Time -->
+		<div class="loadTime"></div>
 		<!-- Search bar -->
 		<div id="go_container">
 			<div id="go">
@@ -274,6 +276,21 @@
 			}
 		?>
 		<script>
+			// find out how long it takes to load the page
+			function getLoadTime() {
+				var now = new Date().getTime();
+				
+				// Get the performance object
+				window.performance = window.performance || window.mozPerformance || window.msPerformace || window.webkitPerformance || {};
+				var timing = performance.timing || {};
+				if (timing) {
+					var load_time = now - timing.navigationStart;
+					$('.loadTime').append(load_time + 'ms');
+				}
+			}
+			
+			$(document).ready(getLoadTime());
+			
 			// clock
 			//var clock = $('#clock').FlipClock({
 			//	clockFace: 'TwentyFourHourClock'
@@ -286,50 +303,44 @@
 			});
 			
 			// shows information based on settings menu clicks
-			$(function () {
-				$('.show_link'+'.menu').click(function() {
-					$(this).parent().hide();
-					var show = $(this).attr('show');
-					$('#'+show).load('settings/'+show+'.php');
-					$('#'+show).show();
-				});
+			$('.show_link'+'.menu').click(function() {
+				$(this).parent().hide();
+				var show = $(this).attr('show');
+				$('#'+show).load('settings/'+show+'.php');
+				$('#'+show).show();
 			});
 			
 			// shows different tabs depending on which tab is clicked on
-			$(function () {
-				$('.show_link'+'.border').click(function() {
-					$(this).parent().children('h2').css('border-bottom', '1px solid black;');
-					$(this).css('border-bottom', '2px solid white');
-					var show = $(this).attr('show');
-					$('#settings_content').children().hide();
-					$('#'+show).show();
-				});
+			$('.show_link'+'.border').click(function() {
+				$(this).parent().children('h2').css('border-bottom', '1px solid black;');
+				$(this).css('border-bottom', '2px solid white');
+				var show = $(this).attr('show');
+				$('#settings_content').children().hide();
+				$('#'+show).show();
 			});
 			
 			// allows an inputted option to show
-			$(function () {
-				$('.show-and-hide-content').each(function (i) {
-					var $row = $(this);
-					// radios
-					var $radios = $row.find('input');
-					$radios.on('change', function () {
-						var type = $(this).attr('data-type');
-						$row
-							.find('.content').hide()
-							.filter('.content-' + type)
-								.show();
-					});
-					// dropdown boxes
-					var $selects = $row.find('select');
-					$selects.on('change', function () {
-						var type = $(this).find('option:selected').attr('data-type');
-						$row
-							.find('.content').hide().prop('disabled', true)
-							.filter('.content-' + type)
-							// any textboxes which are not being shown must be disabled as the content will be sent either way
-							// this is to fix the problem where if all the textboxes have the same name, only the information from the last text box will be posted
-								.show().prop('disabled', false);
-					});
+			$('.show-and-hide-content').each(function (i) {
+				var $row = $(this);
+				// radios
+				var $radios = $row.find('input');
+				$radios.on('change', function () {
+					var type = $(this).attr('data-type');
+					$row
+						.find('.content').hide()
+						.filter('.content-' + type)
+							.show();
+				});
+				// dropdown boxes
+				var $selects = $row.find('select');
+				$selects.on('change', function () {
+					var type = $(this).find('option:selected').attr('data-type');
+					$row
+						.find('.content').hide().prop('disabled', true)
+						.filter('.content-' + type)
+						// any textboxes which are not being shown must be disabled as the content will be sent either way
+						// this is to fix the problem where if all the textboxes have the same name, only the information from the last text box will be posted
+							.show().prop('disabled', false);
 				});
 			});
 		</script>

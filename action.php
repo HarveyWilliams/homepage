@@ -33,8 +33,8 @@
 		// if a new link has been set...
 		if (isset($_POST['link_name'])) {
 			$link_name = clean($_POST['link_name']);
-			$background_colour = clean($_POST['background_colour']);
-			$icon_colour = clean($_POST['icon_colour']);
+			$link_background_colour = clean($_POST['link_background_colour']);
+			$link_icon_colour = clean($_POST['link_icon_colour']);
 			$link_url = clean($_POST['link_url']);
 			$link_font = clean($_POST['link_font']);
 			//! icon name still needs sanitizing
@@ -42,7 +42,7 @@
 			$link = $sxe->links->addChild('link');
 			
 			// depending on how the user chose the file
-			switch ($_POST['icon_type']) {
+			switch ($_POST['link_icon_type']) {
 				case "upload":
 					$name = $_FILES["link_icon_upload"]["name"];
 					$ext = end(explode(".", $name));
@@ -63,8 +63,8 @@
 			}
 			
 			$link->addChild('name', $link_name);
-			$link->addChild('background_colour', $background_colour);
-			$link->addChild('icon_colour', $icon_colour);
+			$link->addChild('background_colour', $link_background_colour);
+			$link->addChild('icon_colour', $link_icon_colour);
 			$link->addChild('url', $link_url);
 			$link->addChild('font', $link_font);
 			$sxe->asXML($xml_file);
