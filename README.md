@@ -15,4 +15,10 @@ The CMS offers options such as:
 
 This project is in no way complete! Much more work needs to be done before it is good to use.
 
-One problem is that since this uses the back-end programming language PHP, it must be either hosted locally, or on a server.
+One problem is that since this uses the back-end programming language PHP, it must be either hosted locally, or on a server. I hope to one day offer this home page CMS as part of an online package so that people can create accounts, and access their home page from anywhere in the world.
+
+TO DO:
+- fix the create a new link and edit an existing link
+- fix the edit a link CSS file
+- add syntax highlighing for when users edit CSS
+- make the site work better with phones
